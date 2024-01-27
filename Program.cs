@@ -15,12 +15,22 @@ namespace FormyPdstawy
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Pliki.odczytajPlik();
+            Form1 form1 = new Form1();
+            setSecurity(ref form1);
+            Application.Run(form1);
+            
+            
         }
 
-        static void Zaladujdane()
+        private static void setSecurity(ref Form1 frm)
         {
-
+            foreach (var button in frm.Controls.OfType<Button>().Where(btn => btn.Tag?.ToString() == "admin"))
+            {
+                button.Enabled = true;
+            }
         }
+
+        
     }
 }

@@ -8,9 +8,9 @@ namespace FormyPdstawy
 {
     public class Kolarz
     {
-        private static int nextId = 0;
+        private static int nextId = 1;
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public bool Wpisowe { get; set; }
         public byte Wiek { get; set; }
         public string? Team { get; set; }
@@ -21,5 +21,10 @@ namespace FormyPdstawy
 
         public void nowyNumer()
         {  Id = nextId++; }
+
+        public void aktualizujID(int _id)
+        {
+            Id=_id;
+        }
     }
 }

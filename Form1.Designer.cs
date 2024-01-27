@@ -48,10 +48,15 @@
             btnEdytuj = new Button();
             btnUsun = new Button();
             btnZamknij = new Button();
+            panel1 = new Panel();
+            btnFiltr = new Button();
+            txtFiltr = new TextBox();
+            label2 = new Label();
             pnTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)kolarzBindingSource).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // pnTop
@@ -62,7 +67,7 @@
             pnTop.Controls.Add(label1);
             pnTop.Location = new Point(12, 12);
             pnTop.Name = "pnTop";
-            pnTop.Size = new Size(1260, 100);
+            pnTop.Size = new Size(1123, 100);
             pnTop.TabIndex = 0;
             // 
             // pictureBox1
@@ -96,11 +101,11 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Id, wpisoweDataGridViewCheckBoxColumn, wiekDataGridViewTextBoxColumn, teamDataGridViewTextBoxColumn, imieDataGridViewTextBoxColumn, nazwiskoDataGridViewTextBoxColumn, rankingDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn });
             dataGridView1.DataSource = kolarzBindingSource;
-            dataGridView1.Location = new Point(12, 133);
+            dataGridView1.Location = new Point(12, 181);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(1260, 398);
+            dataGridView1.Size = new Size(1123, 368);
             dataGridView1.TabIndex = 1;
             // 
             // Id
@@ -161,6 +166,8 @@
             // 
             kolarzBindingSource.AllowNew = false;
             kolarzBindingSource.DataSource = typeof(Kolarz);
+            kolarzBindingSource.Filter = "";
+            kolarzBindingSource.Sort = "";
             // 
             // btnDodaj
             // 
@@ -169,11 +176,12 @@
             btnDodaj.ImageAlign = ContentAlignment.MiddleLeft;
             btnDodaj.ImageKey = "add.png";
             btnDodaj.ImageList = imageList1;
-            btnDodaj.Location = new Point(12, 552);
+            btnDodaj.Location = new Point(12, 570);
             btnDodaj.Name = "btnDodaj";
             btnDodaj.Padding = new Padding(5, 0, 0, 0);
             btnDodaj.Size = new Size(157, 48);
             btnDodaj.TabIndex = 2;
+            btnDodaj.Tag = "admin";
             btnDodaj.Text = "Dodaj kolarza";
             btnDodaj.UseVisualStyleBackColor = false;
             btnDodaj.Click += btnDodaj_Click;
@@ -187,6 +195,7 @@
             imageList1.Images.SetKeyName(1, "close.png");
             imageList1.Images.SetKeyName(2, "delete.png");
             imageList1.Images.SetKeyName(3, "edit.png");
+            imageList1.Images.SetKeyName(4, "filter_funnel_marketing_icon.png");
             // 
             // btnEdytuj
             // 
@@ -194,11 +203,12 @@
             btnEdytuj.ImageAlign = ContentAlignment.MiddleLeft;
             btnEdytuj.ImageKey = "edit.png";
             btnEdytuj.ImageList = imageList1;
-            btnEdytuj.Location = new Point(175, 552);
+            btnEdytuj.Location = new Point(175, 570);
             btnEdytuj.Name = "btnEdytuj";
             btnEdytuj.Padding = new Padding(5, 0, 0, 0);
             btnEdytuj.Size = new Size(157, 48);
             btnEdytuj.TabIndex = 3;
+            btnEdytuj.Tag = "admin";
             btnEdytuj.Text = "Edytuj kolarza";
             btnEdytuj.UseVisualStyleBackColor = true;
             btnEdytuj.Click += btnEdytuj_Click;
@@ -209,11 +219,12 @@
             btnUsun.ImageAlign = ContentAlignment.MiddleLeft;
             btnUsun.ImageKey = "delete.png";
             btnUsun.ImageList = imageList1;
-            btnUsun.Location = new Point(338, 552);
+            btnUsun.Location = new Point(338, 570);
             btnUsun.Name = "btnUsun";
             btnUsun.Padding = new Padding(5, 0, 0, 0);
             btnUsun.Size = new Size(157, 48);
             btnUsun.TabIndex = 4;
+            btnUsun.Tag = "admin";
             btnUsun.Text = "Usuń kolarza";
             btnUsun.UseVisualStyleBackColor = true;
             btnUsun.Click += btnUsun_Click;
@@ -224,7 +235,7 @@
             btnZamknij.ImageAlign = ContentAlignment.MiddleLeft;
             btnZamknij.ImageKey = "close.png";
             btnZamknij.ImageList = imageList1;
-            btnZamknij.Location = new Point(1115, 552);
+            btnZamknij.Location = new Point(978, 570);
             btnZamknij.Name = "btnZamknij";
             btnZamknij.Padding = new Padding(5, 0, 0, 0);
             btnZamknij.Size = new Size(157, 48);
@@ -233,12 +244,54 @@
             btnZamknij.UseVisualStyleBackColor = true;
             btnZamknij.Click += btnZamknij_Click;
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.MediumSeaGreen;
+            panel1.Controls.Add(btnFiltr);
+            panel1.Controls.Add(txtFiltr);
+            panel1.Controls.Add(label2);
+            panel1.Location = new Point(12, 129);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(417, 46);
+            panel1.TabIndex = 6;
+            // 
+            // btnFiltr
+            // 
+            btnFiltr.ImageIndex = 4;
+            btnFiltr.ImageList = imageList1;
+            btnFiltr.Location = new Point(356, 3);
+            btnFiltr.Name = "btnFiltr";
+            btnFiltr.Size = new Size(46, 37);
+            btnFiltr.TabIndex = 10;
+            btnFiltr.UseVisualStyleBackColor = true;
+            btnFiltr.Click += btnFiltr_Click;
+            // 
+            // txtFiltr
+            // 
+            txtFiltr.Location = new Point(71, 11);
+            txtFiltr.Name = "txtFiltr";
+            txtFiltr.Size = new Size(279, 23);
+            txtFiltr.TabIndex = 9;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(15, 11);
+            label2.Name = "label2";
+            label2.Size = new Size(50, 21);
+            label2.TabIndex = 0;
+            label2.Text = "Filtry";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DeepSkyBlue;
-            ClientSize = new Size(1284, 612);
+            ClientSize = new Size(1147, 630);
+            Controls.Add(panel1);
             Controls.Add(btnZamknij);
             Controls.Add(btnUsun);
             Controls.Add(btnEdytuj);
@@ -248,12 +301,13 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "Aplikacja do zarządzania Tour De Pologne";
-            Activated += Form1_Activated;
             pnTop.ResumeLayout(false);
             pnTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)kolarzBindingSource).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -277,5 +331,9 @@
         private DataGridViewTextBoxColumn nazwiskoDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn rankingDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
+        private Panel panel1;
+        private Label label2;
+        private Button btnFiltr;
+        private TextBox txtFiltr;
     }
 }

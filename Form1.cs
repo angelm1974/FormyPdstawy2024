@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace FormyPdstawy
 {
     public partial class Form1 : Form
@@ -6,6 +8,7 @@ namespace FormyPdstawy
         {
             InitializeComponent();
             kolarzBindingSource.DataSource = Program.listaKolarzy;
+            Refreshing();
         }
 
 
@@ -14,6 +17,8 @@ namespace FormyPdstawy
         {
             DialogKolarz dlg = new DialogKolarz(new Kolarz());
             dlg.ShowDialog();
+            Pliki.zapiszPlik();
+            Refreshing();
         }
 
         private void btnEdytuj_Click(object sender, EventArgs e)
@@ -21,28 +26,44 @@ namespace FormyPdstawy
             var wybrany = (Kolarz)kolarzBindingSource.Current;
             DialogKolarz dlg = new DialogKolarz(wybrany);
             dlg.ShowDialog();
+            Pliki.zapiszPlik();
+            Refreshing();
         }
 
         private void btnUsun_Click(object sender, EventArgs e)
         {
-
+            var kolarzDoUsuniecia = (Kolarz)kolarzBindingSource.Current;
+            if (kolarzDoUsuniecia != null)
+            {
+                Program.listaKolarzy.Remove(kolarzDoUsuniecia);
+                Pliki.zapiszPlik();
+                Refreshing();
+            }
         }
 
         private void btnZamknij_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
         #endregion
 
-        private void Form1_Activated(object sender, EventArgs e)
-        {
-            dataGridView1.DataSource = null;
-            dataGridView1.DataSource = kolarzBindingSource;
-        }
+
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnFiltr_Click(object sender, EventArgs e)
+        {
+            kolarzBindingSource.DataSource = Program.listaKolarzy.OrderBy(k => k.Id).Where(k => k.Nazwisko.StartsWith(txtFiltr.Text));
+            Refreshing();
+        }
+
+        private void Refreshing()
+        {
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = kolarzBindingSource;
         }
     }
 }
